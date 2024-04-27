@@ -17,7 +17,7 @@ LinkTree4Dev é uma aplicação web desenvolvida com ReactJS, Tailwind CSS e Fir
 
 ## Screenshots
 
-![Tela de Login](https://ibb.co/26r22C7)
+![Tela de Login](https://i.ibb.co/j5YKKQv/Captura-de-Tela-2024-04-26-a-s-21-16-08.png)
 
 ![Área do admin](https://lh3.googleusercontent.com/d/1MHBlmVSDjVkjBDJpwcDYpC4KNaXt5-PA)
 
