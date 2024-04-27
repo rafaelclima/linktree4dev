@@ -1,23 +1,43 @@
 import { Input } from "@material-tailwind/react";
 import { Link2 } from "lucide-react";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { LinkContext } from "../context/LinkContext";
 import Snackbar from "../components/snackbar";
-import { addDoc, collection } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../../services/firebaseConnection";
 
 export function Social() {
   const { facebookUrl, instagramUrl, youtubeUrl } = useContext(LinkContext);
 
   const [showSnackbar, setShowSnackbar] = useState(false);
+  const [messageSnackBar, setMessageSnackBar] = useState("");
+  const [typeSnackBar, setTypeSnackBar] = useState<null | "error" | "success">(
+    null
+  );
   const [linkFacebook, setLinkFacebook] = useState("");
   const [linkInstagram, setLinkInstagram] = useState("");
   const [linkYoutube, setLinkYoutube] = useState("");
+
+  useEffect(() => {
+    function loadLinks() {
+      const docRef = doc(db, "socialLink", "link");
+      getDoc(docRef).then((snapshot) => {
+        if (snapshot.data() !== undefined) {
+          setLinkFacebook(snapshot?.data()?.linkFacebook);
+          setLinkInstagram(snapshot?.data()?.linkInstagram);
+          setLinkYoutube(snapshot?.data()?.linkYoutube);
+        }
+      });
+    }
+    loadLinks();
+  }, []);
 
   const handleShowSnackbar = () => {
     setShowSnackbar(true);
     setTimeout(() => {
       setShowSnackbar(false);
+      setMessageSnackBar("");
+      setTypeSnackBar(null);
     }, 2500);
   };
 
@@ -47,11 +67,13 @@ export function Social() {
     }
 
     if (linkFacebook === "" && linkInstagram === "" && linkYoutube === "") {
-      alert("Preencha pelo menos um dos links de redes sociais");
+      setMessageSnackBar("Preencha pelo menos um dos links");
+      setTypeSnackBar("error");
+      handleShowSnackbar();
       return;
     }
 
-    addDoc(collection(db, "socialLink"), {
+    setDoc(doc(db, "socialLink", "link"), {
       linkFacebook,
       linkInstagram,
       linkYoutube,
@@ -60,14 +82,13 @@ export function Social() {
         setLinkFacebook("");
         setLinkInstagram("");
         setLinkYoutube("");
-
-        alert("Cadastrado com sucesso");
+        setMessageSnackBar("Cadastro realizado com sucesso");
+        setTypeSnackBar("success");
+        handleShowSnackbar();
       })
       .catch((error) => {
         console.log("Erro ao cadastrar no banco" + error);
       });
-
-    handleShowSnackbar();
   };
 
   return (
@@ -128,8 +149,8 @@ export function Social() {
           </button>
           {showSnackbar && (
             <Snackbar
-              message="Links cadastrados com sucesso!"
-              type="success"
+              message={messageSnackBar}
+              type={typeSnackBar}
               onClose={() => setShowSnackbar(false)}
             />
           )}
