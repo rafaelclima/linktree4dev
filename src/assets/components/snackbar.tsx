@@ -2,7 +2,7 @@ import { useState } from "react";
 
 interface SnackbarProps {
   message: string;
-  type: "success" | "error";
+  type: "success" | "error" | null;
   onClose: () => void;
 }
 
@@ -24,9 +24,9 @@ const Snackbar: React.FC<SnackbarProps> = ({ message, type, onClose }) => {
           : "opacity-0 pointer-events-none transition-opacity duration-300"
       }`}
     >
-      <div className="container mx-auto">{message}</div>
+      <div className="container mx-auto">{message} </div>
       <button
-        className="absolute top-0 bottom-0 right-0 left-100 ml-2 px-2 py-2"
+        className="absolute top-0 bottom-0 right-0 left-100 ml-2 px-1.5 py-1.5"
         onClick={handleClose}
       >
         &#10005;
