@@ -6,6 +6,7 @@ import { Login } from "./assets/pages/Login";
 import { Social } from "./assets/pages/Social";
 
 import { Private } from "./routes/Private";
+import NotFound from "./assets/pages/NotFound";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
         ),
       },
     ],
+  },
+  {
+    path: "*",
+    element: <NotFound />,
   },
 ]);
 
