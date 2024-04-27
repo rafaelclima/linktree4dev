@@ -1,9 +1,10 @@
 import { Input } from "@material-tailwind/react";
 import { Link2, Trash2 } from "lucide-react";
 import { LinkCards } from "../components/link-cards";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { LinkContext } from "../context/LinkContext";
 import { db } from "../../services/firebaseConnection";
+import Snackbar from "../components/snackbar";
 import {
   addDoc,
   collection,
@@ -14,13 +15,60 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 
+interface LinkProps {
+  id: string;
+  name: string;
+  url: string;
+  bg: string;
+  color: string;
+}
+
 export function Admin() {
-  const { cardsLink, addCardLink, cardLinkId, incrementId } =
-    useContext(LinkContext);
+  const { addCardLink, cardLinkId, incrementId } = useContext(LinkContext);
   const [nomeLink, setNomeLink] = useState("");
   const [urlLink, setUrlLink] = useState("");
   const [corFundoLink, setCorFundoLink] = useState("#FFFFFF");
   const [corTextoLink, setCorTextoLink] = useState("#000000");
+  const [dbCardLink, setDbCardLink] = useState<LinkProps[]>([]);
+  const [showSnackBar, setShowSnackbar] = useState(false);
+  const [messageSnackBar, setMessageSnackBar] = useState("");
+  const [typeSnackBar, setTypeSnackBar] = useState<null | "error" | "success">(
+    null
+  );
+
+  const handleShowSnackbar = () => {
+    setShowSnackbar(true);
+    setTimeout(() => {
+      setShowSnackbar(false);
+      setMessageSnackBar("");
+      setTypeSnackBar(null);
+    }, 2500);
+  };
+
+  useEffect(() => {
+    const linksRef = collection(db, "linksCard");
+    const queryRef = query(linksRef, orderBy("createdAt", "asc"));
+
+    const unsub = onSnapshot(queryRef, (snapshot) => {
+      const lista = [] as LinkProps[];
+
+      snapshot.forEach((doc) => {
+        lista.push({
+          id: doc.id,
+          name: doc.data().name,
+          url: doc.data().url,
+          bg: doc.data().bgCard,
+          color: doc.data().linkColor,
+        });
+      });
+
+      setDbCardLink(lista);
+    });
+
+    return () => {
+      unsub();
+    };
+  }, []);
 
   function handleSubmitLinks() {
     const newCardLink = {
@@ -34,8 +82,10 @@ export function Admin() {
     addCardLink(newCardLink);
     incrementId();
 
-    if (nomeLink === "") {
-      alert("Preencha todos os campos para cadastrar um card");
+    if (nomeLink === "" || urlLink === "") {
+      setMessageSnackBar("Preencha todos os campos!");
+      setTypeSnackBar("error");
+      handleShowSnackbar();
       return;
     }
 
@@ -49,11 +99,18 @@ export function Admin() {
       .then(() => {
         setNomeLink("");
         setUrlLink("");
-        alert("Cadastrado com sucesso");
+        setMessageSnackBar("Cadastro concluído com sucesso");
+        setTypeSnackBar("success");
+        handleShowSnackbar();
       })
       .catch((error) => {
         console.log("Erro ao cadastrar no banco" + error);
       });
+  }
+
+  async function handleDeleteLinkDb(id: string) {
+    const docRef = doc(db, "linksCard", id);
+    await deleteDoc(docRef);
   }
 
   return (
@@ -73,10 +130,11 @@ export function Admin() {
           type="url"
           color="white"
           label="URL do link"
+          placeholder="http://"
           onPointerEnterCapture=""
           onPointerLeaveCapture=""
           crossOrigin=""
-          defaultValue="http://"
+          value={urlLink}
           onChange={(ev) => setUrlLink(ev.target.value)}
         />
         <div className=" flex items-center justify-center gap-8 ">
@@ -140,18 +198,32 @@ export function Admin() {
         <h1 className=" text-2xl text-center font-poppins font-bold mt-12 ">
           Meus Links
         </h1>
-        {cardsLink.length > 0 &&
-          cardsLink.map((link) => (
+        {dbCardLink.length > 0 &&
+          dbCardLink.map((link) => (
             <LinkCards
               key={link.id}
-              style={{ backgroundColor: link.corFundo }}
+              style={{ backgroundColor: link.bg }}
               additionalClasses={`flex items-center justify-between font-semibold`}
             >
-              <p style={{ color: link.corTexto }}>{link.nome}</p>
-              <Trash2 className="cursor-pointer" color={`${link.corTexto}`} />
+              <p style={{ color: link.color }}>{link.name}</p>
+              <Trash2
+                onClick={() => handleDeleteLinkDb(link.id)}
+                className="cursor-pointer"
+                color={`${link.color}`}
+              />
             </LinkCards>
           ))}
       </section>
+      <div>
+        {showSnackBar && (
+          <Snackbar
+            message={messageSnackBar}
+            type={typeSnackBar}
+            onClose={() => setShowSnackbar(false)}
+          />
+        )}
+        {/* Restante do conteúdo do seu componente principal */}
+      </div>
     </div>
   );
 }
