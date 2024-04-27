@@ -17,11 +17,15 @@ LinkTree4Dev é uma aplicação web desenvolvida com ReactJS, Tailwind CSS e Fir
 
 ## Screenshots
 
-![Tela de Login](https://drive.google.com/uc?export=view&id=1tQF6p8KoDdfE5a31uvM83DmwT0rqrizN)
-![Área do admin](https://drive.google.com/uc?export=view&id=1MHBlmVSDjVkjBDJpwcDYpC4KNaXt5-PA)
-![Área do admin](https://drive.google.com/uc?export=view&id=1Andoflu3NXsM2-FGra2XI2QOq6eDLqtt)
-![Link para as redes sociais](https://drive.google.com/uc?export=view&id=10NWFduvA_lzXsZPJGUupLhTz43uJGhdW)
-![Página inicial](https://drive.google.com/uc?export=view&id=1cItuXKt08P2_MNRwloSDjTQmHoiZI8Ox)
+![Tela de Login](https://lh3.googleusercontent.com/d/1tQF6p8KoDdfE5a31uvM83DmwT0rqrizN)
+
+![Área do admin](https://lh3.googleusercontent.com/d/1MHBlmVSDjVkjBDJpwcDYpC4KNaXt5-PA)
+
+![Área do admin](https://lh3.googleusercontent.com/d/1Andoflu3NXsM2-FGra2XI2QOq6eDLqtt)
+
+![Link para as redes sociais](https://lh3.googleusercontent.com/d/10NWFduvA_lzXsZPJGUupLhTz43uJGhdW)
+
+![Página inicial](https://lh3.googleusercontent.com/d/1cItuXKt08P2_MNRwloSDjTQmHoiZI8Ox)
 
 ## Autores
 
