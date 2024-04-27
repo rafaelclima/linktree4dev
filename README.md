@@ -19,13 +19,13 @@ LinkTree4Dev é uma aplicação web desenvolvida com ReactJS, Tailwind CSS e Fir
 
 ![Tela de Login](https://i.ibb.co/j5YKKQv/Captura-de-Tela-2024-04-26-a-s-21-16-08.png)
 
-![Área do admin](https://lh3.googleusercontent.com/d/1MHBlmVSDjVkjBDJpwcDYpC4KNaXt5-PA)
+![Área do admin](https://i.ibb.co/Rz7M3XN/Captura-de-Tela-2024-04-26-a-s-21-17-42.png)
 
-![Área do admin](https://lh3.googleusercontent.com/d/1Andoflu3NXsM2-FGra2XI2QOq6eDLqtt)
+![Área do admin](https://i.ibb.co/HzJJSSd/Captura-de-Tela-2024-04-26-a-s-21-18-49.png)
 
-![Link para as redes sociais](https://lh3.googleusercontent.com/d/10NWFduvA_lzXsZPJGUupLhTz43uJGhdW)
+![Link para as redes sociais](https://i.ibb.co/w0wYNM4/Captura-de-Tela-2024-04-26-a-s-21-19-21.png)
 
-![Página inicial](https://lh3.googleusercontent.com/d/1cItuXKt08P2_MNRwloSDjTQmHoiZI8Ox)
+![Página inicial](https://i.ibb.co/YBMHGKD/Captura-de-Tela-2024-04-26-a-s-21-19-41.png)
 
 ## Autores
 
