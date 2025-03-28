@@ -1,9 +1,11 @@
 # 🌳 LinkTree4Dev  
 
-![React](https://img.shields.io/badge/React-18.2.0-61DAFB?style=for-the-badge&logo=react&logoColor=white)
-![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.2.4-38B2AC?style=for-the-badge&logo=tailwindcss&logoColor=white)
-![Firebase](https://img.shields.io/badge/Firebase-9.6.1-FFCA28?style=for-the-badge&logo=firebase&logoColor=white)
-![Firestore](https://img.shields.io/badge/Firestore-9.6.1-FFA000?style=for-the-badge&logo=firebase&logoColor=white)
+<div data-badges>
+  <img src="https://img.shields.io/badge/React-18.2.0-61DAFB?style=for-the-badge&logo=react&logoColor=white" alt="React">
+  <img src="https://img.shields.io/badge/TailwindCSS-3.2.4-38B2AC?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="TailwindCSS">
+  <img src="https://img.shields.io/badge/Firebase-9.6.1-FFCA28?style=for-the-badge&logo=firebase&logoColor=white" alt="Firebase">
+  <img src="https://img.shields.io/badge/Firestore-9.6.1-FFA000?style=for-the-badge&logo=firebase&logoColor=white" alt="Firestore">
+</div>
 
 🔗 **LinkTree4Dev** é uma aplicação web desenvolvida com **ReactJS**, **Tailwind CSS** e **Firebase**, projetada para simplificar a organização e compartilhamento de links para redes sociais e outras páginas na internet.  
 
